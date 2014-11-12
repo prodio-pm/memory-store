@@ -1,0 +1,35 @@
+{
+  "name": "prodio-memory-store",
+  "version": "0.0.1",
+  "description": "An in memory store adapter for prodio-stores",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha test"
+  },
+  "keywords": [
+    "Memory",
+    "Prodio",
+    "Store"
+  ],
+  "author": "Jeremy Darling <jeremy.darling@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "mocha": "^2.0.1"
+  },
+  "dependencies": {
+    "async": "^0.9.0",
+    "bson-objectid": "^1.0.0",
+    "sift": "^0.1.0"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:prodio-pm/memory-store.git"
+  },
+  "bugs": {
+    "url": "https://github.com/prodio-pm/memory-store/issues"
+  },
+  "homepage": "https://github.com/prodio-pm/memory-store"
+}
