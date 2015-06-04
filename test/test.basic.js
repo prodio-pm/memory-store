@@ -13,8 +13,19 @@ describe('Store', function(){
       Store.init({stores: {}});
       done();
     });
+    it('Should call callback if supplied', function(done){
+      new Store(TESTS_COLLECTION, function(err, test){
+        assert(test);
+        done();
+      });
+    });
     it('Should init a store when asked', function(done){
       var test = new Store(TESTS_COLLECTION);
+      assert(test);
+      done();
+    });
+    it('Should init a store from collection option', function(done){
+      var test = new Store({collection: TESTS_COLLECTION});
       assert(test);
       done();
     });
