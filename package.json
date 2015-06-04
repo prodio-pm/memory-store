@@ -1,6 +1,6 @@
 {
   "name": "prodio-memory-store",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "An in memory store adapter for prodio-stores",
   "main": "index.js",
   "scripts": {
