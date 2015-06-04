@@ -75,12 +75,31 @@ describe('Store', function(){
         });
       });
     });
+    it('Should be able to update a record by using filter', function(done){
+      var test = new Store(TESTS_COLLECTION);
+      var r = {foo: 'bar 4'};
+      test.insert(r, function(err, rec){
+        assert(!err, 'Test store threw an error: '+err);
+        var rec = rec[rec.root];
+        assert(rec, 'Record didn\'t return on insert');
+        test.update({foo: 'bar 4'}, {bar: 'none', foo: 'bar 4'}, function(err, rec2){
+          assert(!err, 'Test store threw an error: '+err);
+          var res = rec2[rec2.root];
+          assert(res, 'Record didn\'t return on get');
+          assert(res._created, 'Created got cleared');
+          assert(res._updated, 'Updated doesn\'t exist');
+          assert(rec._id.toString() === rec2[rec2.root]._id.toString());
+          assert(rec2[rec2.root].foo === r.foo, 'Fetched record does not match inserted record');
+          done();
+        });
+      });
+    });
     it('Should be able to list records from a store', function(done){
       var test = new Store(TESTS_COLLECTION);
       test.asArray(null, function(err, res){
         assert(!err, 'Test store threw an error: '+err);
-        assert(res.length===3, 'Length is wrong');
-        assert(res.count===3, 'Count is wrong');
+        assert(res.length===4, 'Length is wrong');
+        assert(res.count===4, 'Count is wrong');
         done();
       });
     });
@@ -88,8 +107,8 @@ describe('Store', function(){
       var test = new Store(TESTS_COLLECTION);
       test.asArray(null, function(err, res){
         assert(!err, 'Test store threw an error: '+err);
-        assert(res.length===3, 'Length is wrong');
-        assert(res.count===3, 'Count is wrong');
+        assert(res.length===4, 'Length is wrong');
+        assert(res.count===4, 'Count is wrong');
         done();
       });
     });
@@ -97,7 +116,7 @@ describe('Store', function(){
       var test = new Store(TESTS_COLLECTION);
       test.asArray({offset: 1, limit: 1}, function(err, res){
         assert(!err, 'Test store threw an error: '+err);
-        assert(res.length===3, 'Length is wrong');
+        assert(res.length===4, 'Length is wrong');
         assert(res.offset===1, 'Offset is wrong');
         assert(res.limit===1, 'Limit is wrong');
         assert(res.count===1, 'Count is wrong');
@@ -109,8 +128,8 @@ describe('Store', function(){
       var test = new Store(TESTS_COLLECTION);
       test.asArray({filter: {bar: {$exists: true}}}, function(err, res){
         assert(!err, 'Test store threw an error: '+err);
-        assert(res.length===1, 'Length is wrong');
-        assert(res.count===1, 'Count is wrong');
+        assert(res.length===2, 'Length is wrong');
+        assert(res.count===2, 'Count is wrong');
         done();
       });
     });
