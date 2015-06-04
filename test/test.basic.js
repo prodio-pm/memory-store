@@ -29,6 +29,20 @@ describe('Store', function(){
       assert(test);
       done();
     });
+    it('Should throw an error when trying to update a record by id that doesn\'t exist', function(done){
+      var test = new Store({collection: TESTS_COLLECTION});
+      test.update('1234', {}, function(err){
+        assert(!!err, 'No error thrown on invalid ID');
+        done();
+      });
+    });
+    it('Should throw an error when trying to update a record by key that doesn\'t exist', function(done){
+      var test = new Store({collection: TESTS_COLLECTION});
+      test.update({foo: 'bar 1'}, {}, function(err){
+        assert(!!err, 'No error thrown on invalid ID');
+        done();
+      });
+    });
     it('Should insert records', function(done){
       var test = new Store(TESTS_COLLECTION);
       test.insert({foo: 'bar 1'}, function(err, rec){
